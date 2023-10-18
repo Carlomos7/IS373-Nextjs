@@ -16,5 +16,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add class_attendance.md
-          git commit -m "Update attendance"
+          git commit -m "Docs: ${GITHUB_ACTOR} updating attendance"
           git push
