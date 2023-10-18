@@ -2,3 +2,5 @@
 
 | Date & Time            | Attendee           | Status  |
 |------------------------|:------------------:|--------:|
+| Wed Oct 18 14:54:12 UTC 2023    | Carlomos7           | Attended |
+
