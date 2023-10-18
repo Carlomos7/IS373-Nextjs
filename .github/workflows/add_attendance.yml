@@ -1,9 +1,7 @@
 name: Attendance Tracker
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   update-attendance:
