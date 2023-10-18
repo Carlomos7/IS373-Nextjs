@@ -1,0 +1,22 @@
+name: Attendance Tracker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-attendance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Update class_attendance.md
+        run: echo "| $(date)    | ${GITHUB_ACTOR}           | Attended |" >> class_attendance.md
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add class_attendance.md
+          git commit -m "Update attendance"
+          git push
