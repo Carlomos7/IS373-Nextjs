@@ -1,3 +1,5 @@
 # IS373-Nextjs
 
-# Testing
+# Attendance
+
+- Wed, 10/18/23 - Rene Gilo - Attended
