@@ -15,8 +15,8 @@ jobs:
         env:
             ATTENDANCE_TOKEN: ${{ secrets.ATTENDANCE_TOKEN }}
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "${GIT_EMAIL}"
+          git config --local user.name "${GITHUB_ACTOR}"
           git add class_attendance.md
           git commit -m "Docs: ${GITHUB_ACTOR} updating attendance"
           git push
