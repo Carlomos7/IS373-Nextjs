@@ -12,7 +12,7 @@ jobs:
         with:
           token: ${{ secrets.ATTENDANCE_TOKEN }}
       - name: Update class_attendance.md
-        run: echo -e "| $(date)    | ${GITHUB_ACTOR}           | Attended |\n" >> class_attendance.md
+        run: echo -e "| $(date +'%Y-%m-%d %H:%M:%S') | ${GITHUB_ACTOR}           | Attended |\n" >> class_attendance.md
       - name: Commit and push
         run: |
           git config --local user.email "${GIT_EMAIL}"
