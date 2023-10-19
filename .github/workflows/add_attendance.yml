@@ -19,4 +19,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add class_attendance.md
           git commit -m "Docs: ${GITHUB_ACTOR} updating attendance"
-          git push
+          git push https://${ATTENDANCE_TOKEN}@github.com/Carlomos7/IS373-Nextjs.git
