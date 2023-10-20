@@ -2,7 +2,7 @@ version: '3'
 services:
   nextjs-app:
     image: rjgilo2799/is373-nextjs:master
-    container_name: is373-nextjs-development
+    container_name: is373-nextjs
     pull_policy: always
     restart: always
     build: 
