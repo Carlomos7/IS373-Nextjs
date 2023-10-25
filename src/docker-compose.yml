@@ -1,11 +1,11 @@
 version: '3.8'
 services:
   nextjs-app:
-    container_name: is373-nextjs
+    container_name: is373-nextjs-local-dev
     build: 
       context: .
       target: runner
-    image: carlomos/nextjs-app:latest
+    image: carlomos/nextjs-app:dev
     ports:
       - "3000:3000"
     labels:
