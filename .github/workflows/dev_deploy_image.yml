@@ -24,8 +24,8 @@ jobs:
       
       - name: Build and push Docker image using docker-compose
         run: |
-          cd next-development/
-          docker-compose -f docker-compose.yml build
+          cd src/
+          docker-compose -f docker-compose.yml build -t ${{ secrets.DOCKER_USERNAME }}/nextjs-docker:dev
           docker-compose -f docker-compose.yml push
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
