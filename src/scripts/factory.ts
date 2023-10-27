@@ -1,24 +1,29 @@
 const {PrismaClient} = require("@prisma/client")
+const axios = require("axios")
 
 const db = new PrismaClient()
 
 const main = async () => {
-    
+
 
     try{
-        const userData = [
-            {
-                name: "John Doe"
-            },
-            {
-                name:"Jane Doe"
-            }
-        ]
+
+        const res = await axios.get('https://jsonplaceholder.typicode.com/users')
+
+        // const userData = [
+        //     {
+        //         name: "John Doe"
+        //     },
+        //     {
+        //         name:"Jane Doe"
+        //     }
+        // ]
     
-        for(const user of userData){
+        for(const user of res.data){
             await db.user.create({
                 data:{
-                    name: user.name
+                    name: user.name,
+                    email:user.email
                 }
             })
         }
