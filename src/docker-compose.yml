@@ -1,7 +1,6 @@
 version: '3.8'
 services:
   nextjs-app:
-    container_name: is373-nextjs-local-dev
     build: 
       context: .
       target: runner
@@ -10,5 +9,3 @@ services:
       - "3000:3000"
     labels:
       - com.centurylinklabs.watchtower.enable=true
-    environment:
-      NODE_ENV: development
