@@ -5,7 +5,7 @@ services:
     build: 
       context: .
       target: runner
-    image: carlomos/nextjs-app:dev
+    image: carlomos/nextjs-app:latest
     ports:
       - "3000:3000"
     labels:
