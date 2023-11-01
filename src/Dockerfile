@@ -1,22 +1,42 @@
-# Use a Node.js image suitable for development
-FROM node:16
-
-# Set the working directory inside the container
+# Build stage
+FROM node:18-alpine AS build
 WORKDIR /app
 
-# Copy the package.json and package-lock.json to the working directory
-COPY package*.json ./
+# Install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Install development and production dependencies
-RUN npm update
-
-RUN npm install
-
-# Copy the rest of your application code to the working directory
+# Copy application files
 COPY . .
 
-# Expose the port that your Next.js app will run on (adjust if needed)
+# Build the application
+ENV NEXT_TELEMETRY_DISABLED 1
+RUN npm run build
+
+# Runner stage
+FROM node:18-alpine AS runner
+WORKDIR /app
+
+# Environment variables
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV HOST 0.0.0.0
+ENV PORT 3000
+
+# Add non-root user
+RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
+
+# Copy necessary files from build stage
+COPY --from=build --chown=nextjs:nextjs /app/public ./public
+COPY --from=build --chown=nextjs:nextjs /app/.next ./.next
+COPY --from=build --chown=nextjs:nextjs /app/node_modules ./node_modules
+COPY --from=build --chown=nextjs:nextjs /app/package.json ./package.json
+
+# Switch to non-root user
+USER nextjs
+
+# Expose the listening port
 EXPOSE 3000
 
-# Start your Next.js app in development mode
-CMD ["npm", "run", "dev"]
+# Start the application
+CMD ["npm", "run", "start"]
