@@ -1,13 +1,16 @@
-version: '3.8'
+version: '3'
 services:
   nextjs-app:
-    container_name: is373-nextjs-local-dev
+    image: rjgilo2799/is373-nextjs:master
+    container_name: is373-nextjs-development
+    pull_policy: always
+    restart: always
     build: 
       context: .
-      target: runner
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
     labels:
       - com.centurylinklabs.watchtower.enable=true
-    environment:
-      NODE_ENV: development
