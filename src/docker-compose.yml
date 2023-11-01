@@ -1,13 +1,36 @@
 version: '3.8'
 services:
+
+  # PostgreSQL database service
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432" # Adjust the port if necessary
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
   nextjs-app:
     container_name: is373-nextjs-local-dev
     build: 
       context: .
       target: runner
+    image: carlomos/nextjs-app:dev
     ports:
       - "3000:3000"
     labels:
       - com.centurylinklabs.watchtower.enable=true
     environment:
       NODE_ENV: development
+    networks:
+      - app-network
+
+    
+networks:
+  app-network:
+    driver: bridge
