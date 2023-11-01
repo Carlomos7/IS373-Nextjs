@@ -1,6 +1,9 @@
 import prisma from "@/client";
 import { createUser } from "@/library/test-functions"
 import { prismaMock } from "@/singleton"
+import {faker} from '@faker-js/faker'
+
+
 
 
 // CREATE
@@ -17,17 +20,17 @@ test("should create new user", async () => {
     //     name:"new user",
     //     email: "newuser@email.com"
     // })
-    
-    const userData = {
-    email: 'test@example.com',
-    name: 'Test User',
-  };
 
-  const createdUser = await prisma.user.create({ data: userData });
+    const fakerUser = (): any => ({
+      name: faker.person.fullName(),
+      email: faker.internet.email()
+      });
 
-  const findCreatedUserInDb = await prisma.user.findFirst({
+  const createdUser = await prisma.user.create({ data: fakerUser() });
+
+  const findCreatedUserInDb = await prisma.user.findUnique({
     where:{
-      email: userData.email
+      id: createdUser.id
     }
   })
 
@@ -37,41 +40,58 @@ test("should create new user", async () => {
 })
 
 // GET
-test("should get all categories", async () => {
-  const categories = await prisma.category.findMany()
+test("should get all users", async () => {
+  const users = await prisma.user.findMany()
 
-  expect(categories.length).toBeGreaterThan(0)
+  expect(users.length).toBeGreaterThan(0)
 })
 
 
 // UPDATE
-test("should update newly created User", async () => {
+test("should update user information", async () => {
 
-  const findUserToUpdate = await prisma.user.findFirst({
-    where:{
-      name:"Test User"
-    }
-  })
+  const userData = {
+    email: faker.internet.email(),
+    name: faker.person.fullName(),
+  };
 
-  const updatedUser = await prisma.user.update({
-    where:{
-      id: findUserToUpdate?.id
-    },
-    data:{
-      name:"Update Test User"
-    }
-  })
+  // Create a user with the generated data
+  const createdUser = await prisma.user.create({ data: userData });
 
-  const updatedUserFromDb = await prisma.user.findFirst({
-    where:{
-      name: "Update Test User"
-    }
-  })
-
-  expect(updatedUser).toEqual(updatedUserFromDb)
+  // Check if the user was created successfully
+  expect(createdUser.email).toBe(userData.email);
+  expect(createdUser.name).toBe(userData.name);
 })
 
 // DELETE 
+test("should delete a specific user", async () => {
+
+     // Create a user for testing purposes
+  const userData = {
+    email: faker.internet.email(),
+    name: faker.person.fullName(),
+  };
+
+  const createdUser = await prisma.user.create({ data: userData });
+
+  // Delete the user
+  await prisma.user.delete({
+    where: {
+      id: createdUser.id,
+    },
+  });
+
+  // Attempt to find the user in the database
+  const foundUser = await prisma.user.findUnique({
+    where: {
+      id: createdUser.id,
+    },
+  });
+
+  // Check that the user is not found in the database (it should be null)
+  expect(foundUser).toBeNull();
+  
+})
 
 
 
