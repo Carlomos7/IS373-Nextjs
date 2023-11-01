@@ -12,5 +12,3 @@ services:
       - com.centurylinklabs.watchtower.enable=true
     environment:
       NODE_ENV: development
-    networks:
-      - app-network
