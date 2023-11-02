@@ -17,7 +17,7 @@ docker-compose up
 ```sh
 npm install
 ```
-3. Generate Prisma client and migrate database schema. These commands will need to be run every time the database schema changes.
+3. Generate Prisma client and migrate database schema. These commands will need to be run every time the database schema changes. Seed automatically runs after migration
 ```sh
 npx prisma migrate dev
 npx prisma generate
