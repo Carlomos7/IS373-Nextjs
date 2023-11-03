@@ -1,7 +1,5 @@
 import prisma from "@/client";
 import { categoryFactory } from "@/factories";
-import { createUser } from "@/library/test-functions"
-import { prismaMock } from "@/singleton"
 import {faker} from '@faker-js/faker'
 
 // CREATE
