@@ -1,10 +1,8 @@
 import prisma from "@/client";
+import { categoryFactory } from "@/factories";
 import { createUser } from "@/library/test-functions"
 import { prismaMock } from "@/singleton"
 import {faker} from '@faker-js/faker'
-
-
-
 
 // CREATE
 test("should create new user", async () => {
@@ -95,5 +93,15 @@ test("should delete a specific user", async () => {
 
 
 
-// USER FACTORY
+// Factory test to generate categories into the table
+test(" Test factory to Generate and insert five categories", async () => {
+  const numberOfCategoriesToGenerate = 5
+  const createdCategories = []
 
+  for (let i = 0; i < numberOfCategoriesToGenerate; i++) {
+    const createdCategory = await categoryFactory();
+    createdCategories.push(createdCategory);
+  }
+
+  expect(createdCategories).toHaveLength(numberOfCategoriesToGenerate)
+})
