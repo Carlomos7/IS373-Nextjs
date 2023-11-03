@@ -5,30 +5,30 @@
 2. Start Docker desktop
 3. Create a new `.env` file and copy the contents:
 ```sh
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/mydb?schema=public"
+DATABASE_URL=
 ```
-
-#Running locally
-1. Start using docker-compose
-```sh
-docker-compose up
-```
-2. Install dependencies
+## Local Setup
+Install Dependencies
 ```sh
 npm install
 ```
-3. Generate Prisma client and migrate database schema and seed database. These commands will need to be run every time the database schema changes.
+
+## Local Docker Setup
+Run the follow to start up the NextJS & the Postgres Containers
+```sh
+docker-compose up
+```
+
+## Prisma Setup
+Generate Prisma Client, Migrate Database Schema, and Seed Database
 ```sh
 npx prisma migrate dev
 npx prisma generate
 npx prisma db seed
 ```
-4. Start dev
-```sh
-npm run dev
-```
 
-#Run Jest CRUD testing
+## Jest Testing
+Run CRUD tests on the API
 ```sh
 npm run test
 ```
