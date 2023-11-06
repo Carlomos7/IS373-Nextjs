@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx prettier --staged
+npx pretty-quick --staged
 npx jest --coverage
