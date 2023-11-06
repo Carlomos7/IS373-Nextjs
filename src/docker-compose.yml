@@ -1,6 +1,5 @@
-version: '3.8'
+version: "3.8"
 services:
-
   # PostgreSQL database service
   postgres:
     image: postgres:latest
@@ -17,7 +16,7 @@ services:
 
   nextjs-app:
     container_name: is373-nextjs-local-dev
-    build: 
+    build:
       context: .
       target: runner
     image: carlomos/nextjs-app:dev
@@ -30,7 +29,6 @@ services:
     networks:
       - app-network
 
-    
 networks:
   app-network:
     driver: bridge
