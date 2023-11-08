@@ -26,3 +26,5 @@
 
 | 2023-11-03 17:32:33 | Protoge           | Attended |
 
+| 2023-11-08 15:11:37 | Adam-pmg           | Attended |
+
