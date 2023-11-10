@@ -15,11 +15,10 @@ services:
       - app-network
 
   nextjs-app:
-    container_name: is373-nextjs-local-dev
-    build:
+    build: 
       context: .
       target: runner
-    image: carlomos/nextjs-app:dev
+    image: carlomos/nextjs-app:latest
     ports:
       - "3000:3000"
     labels:

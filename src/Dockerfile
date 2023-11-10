@@ -1,36 +1,42 @@
-FROM node:18-alpine AS deps
-RUN apk add --no-cache libc6-compat
+# Build stage
+FROM node:18-alpine AS build
 WORKDIR /app
 
+# Install dependencies
 COPY package.json package-lock.json ./
-RUN  npm install --production
+RUN npm ci
 
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# Copy application files
 COPY . .
 
+# Build the application
 ENV NEXT_TELEMETRY_DISABLED 1
-
 RUN npm run build
 
+# Runner stage
 FROM node:18-alpine AS runner
 WORKDIR /app
 
+# Environment variables
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-
-USER nextjs
-
-EXPOSE 3000
-
+ENV HOST 0.0.0.0
 ENV PORT 3000
 
-CMD ["npm", "run", "dev"]
+# Add non-root user
+RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
+
+# Copy necessary files from build stage
+COPY --from=build --chown=nextjs:nextjs /app/public ./public
+COPY --from=build --chown=nextjs:nextjs /app/.next ./.next
+COPY --from=build --chown=nextjs:nextjs /app/node_modules ./node_modules
+COPY --from=build --chown=nextjs:nextjs /app/package.json ./package.json
+
+# Switch to non-root user
+USER nextjs
+
+# Expose the listening port
+EXPOSE 3000
+
+# Start the application
+CMD ["npm", "run", "start"]
