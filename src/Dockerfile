@@ -26,15 +26,12 @@ ENV PORT 3000
 # Add non-root user
 RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
 
-# Install ONLY production dependencies
-COPY package.json package-lock.json ./
-RUN npm ci --only=production
-
 # Copy necessary files from build stage
 COPY --from=build --chown=nextjs:nextjs /app/public ./public
 COPY --from=build --chown=nextjs:nextjs /app/.next ./.next
 COPY --from=build --chown=nextjs:nextjs /app/node_modules ./node_modules
 COPY --from=build --chown=nextjs:nextjs /app/package.json ./package.json
+COPY --from=build --chown=nextjs:nextjs /app/package-lock.json ./package-lock.json
 
 # Switch to non-root user
 USER nextjs
