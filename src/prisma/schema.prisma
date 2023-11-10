@@ -18,6 +18,11 @@ model User {
   posts Post[]
 }
 
+model Task {
+  id   String @id @default(uuid())
+  name String
+}
+
 model Post {
   id      String @id @default(uuid())
   title   String
