@@ -2,7 +2,7 @@
 FROM node:18-alpine AS build
 WORKDIR /app
 
-# Install dependencies
+# Install all dependencies
 COPY package.json package-lock.json ./
 RUN npm ci
 
@@ -25,6 +25,10 @@ ENV PORT 3000
 
 # Add non-root user
 RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
+
+# Install ONLY production dependencies
+COPY package.json package-lock.json ./
+RUN npm ci --only=production
 
 # Copy necessary files from build stage
 COPY --from=build --chown=nextjs:nextjs /app/public ./public
