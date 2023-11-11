@@ -9,6 +9,8 @@ assignees: ''
 
 ### [Title for Technical Story]
 
+**Epic:** [link to related epic]
+
 #### 📌 Objective
 
 [Enter the objective or goal of this story]
