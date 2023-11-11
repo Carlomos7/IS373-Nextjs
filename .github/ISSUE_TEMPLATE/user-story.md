@@ -9,6 +9,8 @@ assignees: ''
 
 ### [Title for User Story]
 
+**Epic:** [link to epic]
+
 ### 📌 Objective
 
 [Enter the objective or goal of this story]
