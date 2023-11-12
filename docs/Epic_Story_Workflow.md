@@ -40,7 +40,7 @@ graph TD
 ```
 
 ### Steps
-
+**Note:** there are issue templates for epics and stories that you can use.
 1. **Create Epic**: Define an overarching task or theme.
 2. **Add Epic to 'Epics Documentation' Board**: Provide visibility and tracking for the Epic.
 3. **Determine Story Types**: Decide if the Epic contains User Stories, Technical Stories, or both.
