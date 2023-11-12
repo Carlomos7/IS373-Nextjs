@@ -2,7 +2,7 @@
 FROM node:18-alpine AS build
 WORKDIR /app
 
-# Install dependencies
+# Install all dependencies
 COPY package.json package-lock.json ./
 RUN npm ci
 
@@ -31,6 +31,7 @@ COPY --from=build --chown=nextjs:nextjs /app/public ./public
 COPY --from=build --chown=nextjs:nextjs /app/.next ./.next
 COPY --from=build --chown=nextjs:nextjs /app/node_modules ./node_modules
 COPY --from=build --chown=nextjs:nextjs /app/package.json ./package.json
+COPY --from=build --chown=nextjs:nextjs /app/package-lock.json ./package-lock.json
 
 # Switch to non-root user
 USER nextjs
