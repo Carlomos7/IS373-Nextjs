@@ -12,6 +12,9 @@ import { DataTable } from "./tasks/data-table"
 import { columns } from "./tasks/columns"
 import { Plus, PlusCircle } from "lucide-react"
 import axios from 'axios'
+import { useRouter } from "next/navigation"
+import { Task } from "@prisma/client"
+import toast from "react-hot-toast"
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -20,22 +23,13 @@ const formSchema = z.object({
 })
 
 interface TaskFormProps {
-    csrf_token: string
+    csrf_token: string;
+    tasks: Task[]
 }
 
-export function TaskForm({ csrf_token }: TaskFormProps) {
+export function TaskForm({ csrf_token, tasks }: TaskFormProps) {
 
-    const [tasks, setTasks] = useState([
-        {
-            name: "Make Dinner"
-        },
-        {
-            name: "Walk Dog"
-        },
-        {
-            name: "Study"
-        }
-    ])
+    const router = useRouter()
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -45,21 +39,24 @@ export function TaskForm({ csrf_token }: TaskFormProps) {
     })
 
 
-
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await axios.post('/api/form-handler', values, {
+            await axios.post('/api/tasks', values, {
                 headers: {
                     'X-CSRF-Token': csrf_token,
                     'Content-Type': 'application/json',
                 },
+
             });
 
-            const { name } = response.data
 
-            setTasks([...tasks, { name }])
+            router.refresh()
+
+            toast.success("Task created")
+
         } catch (error) {
-            console.log(error)
+            console.log("Invalid CSRF")
+            toast.error("CSRF Token Invalid!")
         }
     }
 
