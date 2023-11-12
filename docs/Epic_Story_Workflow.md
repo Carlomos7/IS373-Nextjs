@@ -1,10 +1,12 @@
 # Epic and Story Creation Workflow
 
-[IS 373 - Epics Documentation](https://github.com/users/Carlomos7/projects/5/views/1)
+[IS 373 - Epics Documentation](https://github.com/users/Carlomos7/projects/7/views/1)
+
+[IS 3737 - Task Documentation](https://github.com/users/Carlomos7/projects/5/views/1)
 
 ## Background
 
-In our Agile-based development process, we use **Epics** and **Stories** (User & Technical) to manage and track our work. Epics are overarching tasks or themes, broken down into more specific User or Technical Stories. This approach ensures manageable, trackable tasks that align with our project goals.
+In our Agile-based development process, we use **Epics** and **Stories** (User & Technical) to manage and track our work. Epics are overarching tasks or themes broken down into more specific User or Technical Stories. This approach ensures manageable, trackable tasks that align with our project goals.
 
 ### User Stories in Agile
 
