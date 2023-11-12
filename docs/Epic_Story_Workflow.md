@@ -1,5 +1,7 @@
 # Epic and Story Creation Workflow
 
+[IS 373 - Epics Documentation](https://github.com/users/Carlomos7/projects/5/views/1)
+
 ## Background
 
 In our Agile-based development process, we use **Epics** and **Stories** (User & Technical) to manage and track our work. Epics are overarching tasks or themes, broken down into more specific User or Technical Stories. This approach ensures manageable, trackable tasks that align with our project goals.
@@ -40,16 +42,17 @@ graph TD
 ```
 
 ### Steps
-**Note:** there are issue templates for epics and stories that you can use.
+**Note:** There are issue templates for epics and stories that you can use.
 1. **Create Epic**: Define an overarching task or theme.
 2. **Add Epic to 'Epics Documentation' Board**: Provide visibility and tracking for the Epic.
 3. **Determine Story Types**: Decide if the Epic contains User Stories, Technical Stories, or both.
 4. **Create User/Technical Stories**: Break down the Epic into actionable stories/tasks.
-5. **Add Stories to 'Task Documentation' Board**: Track the progress of each story from backlog to completion.
-6. **Implement Stories**: Work on the stories, adhering to the requirements and goals set forth by the Epic.
-7. **Review, Test, and Document Stories**: Upon completion, thoroughly document the work, including code screenshots, notes, and related feature branches.
-8. **Check Completion of All Stories**: Once all stories under an Epic are completed, the Epic can be closed.
-9. **Close Epic**: Mark the Epic as complete in the 'Epics Documentation' Board.
+5. **Assign to Team Member**: Add an assignee.
+6. **Add Stories to 'Task Documentation' Board**: Track the progress of each story from backlog to completion.
+7. **Implement Stories**: Work on the stories, adhering to the requirements and goals set forth by the Epic.
+8. **Review, Test, and Document Stories**: Upon completion, thoroughly document the work, including code screenshots, notes, and related feature branches.
+9. **Check Completion of All Stories**: Once all stories under an Epic are completed, the Epic can be closed.
+10. **Close Epic**: Mark the Epic as complete in the 'Epics Documentation' Board.
 
 ## Conclusion
 
