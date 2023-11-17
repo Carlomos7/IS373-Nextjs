@@ -22,7 +22,6 @@ const EditTaskPage = async ({ params }: { params: { taskId: string } }) => {
 
     const taskData = await getTaskData(params.taskId)
 
-
     return (
         <EditFormComponent taskData={taskData!} csrf_token={csrfToken} />
     )

@@ -7,7 +7,7 @@ import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { DataTable } from "./tasks/data-table"
 import { columns } from "./tasks/columns"
 import { Plus, PlusCircle } from "lucide-react"
@@ -30,14 +30,12 @@ interface TaskFormProps {
 export function TaskForm({ csrf_token, tasks }: TaskFormProps) {
 
     const router = useRouter()
-
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
         }
     })
-
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
