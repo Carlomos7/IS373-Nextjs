@@ -15,6 +15,7 @@ import axios from 'axios'
 import { useRouter } from "next/navigation"
 import { Task } from "@prisma/client"
 import toast from "react-hot-toast"
+import { UserButton } from "@clerk/nextjs";
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -59,7 +60,12 @@ export function TaskForm({ csrf_token, tasks }: TaskFormProps) {
     }
 
     return (
+        
         <div className="flex flex-col gap-5">
+         <div>
+  <UserButton afterSignOutUrl="/"/>
+  </div>
+            
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex gap-3">
 
