@@ -1,6 +1,7 @@
 import { TaskForm } from '@/components/form-component'
 import { headers } from 'next/headers'
 import { db } from '@/library/db'
+import { UserButton } from "@clerk/nextjs";
 
 const getTasks = async () => {
   try {
@@ -11,12 +12,17 @@ const getTasks = async () => {
 }
 
 export default async function Home() {
+ 
+  <div>
+  <UserButton afterSignOutUrl="/"/>
+  </div>
 
   const csrfToken = headers().get('X-CSRF-Token') || 'missing';
 
   const tasks = await getTasks()
 
   return (
+   
     <>
       <TaskForm csrf_token={csrfToken} tasks={tasks!} />
     </>

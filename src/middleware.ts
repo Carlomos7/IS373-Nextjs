@@ -2,30 +2,37 @@
 import csrf from 'edge-csrf';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { authMiddleware } from "@clerk/nextjs";
 
 
-// Initialize protection function
-const csrfProtect = csrf({
-    cookie: {
-        secure: process.env.NODE_ENV === 'production',
-    },
-});
+// // Initialize protection function
+// const csrfProtect = csrf({
+//     cookie: {
+//         secure: process.env.NODE_ENV === 'production',
+//     },
+// });
 
-export async function middleware(request: NextRequest) {
-    const response = NextResponse.next();
-    // Configuration option to disable CSRF in testing environment
-    const disableCSRFInTest = process.env.NODE_ENV === 'test';
+// // export async function middleware(request: NextRequest) {
+// //     const response = NextResponse.next();
+// //     // Configuration option to disable CSRF in testing environment
+// //     const disableCSRFInTest = process.env.NODE_ENV === 'test';
 
-    // Check if CSRF protection should be disabled in the testing environment
-    if (!disableCSRFInTest) {
-        // CSRF protection
-        const csrfError = await csrfProtect(request, response);
+// //     // Check if CSRF protection should be disabled in the testing environment
+// //     if (!disableCSRFInTest) {
+// //         // CSRF protection
+// //         const csrfError = await csrfProtect(request, response);
 
-        // Check result
-        if (csrfError) {
-            return new NextResponse('invalid csrf token', { status: 403 });
-        }
-    }
+// //         // Check result
+// //         if (csrfError) {
+// //             return new NextResponse('invalid csrf token', { status: 403 });
+// //         }
+// //     }
 
-    return response;
-}
+// //     return response;
+// // }
+
+export default authMiddleware({});
+ 
+export const config = {
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+};
