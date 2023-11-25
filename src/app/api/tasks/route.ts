@@ -1,6 +1,7 @@
 // app/form-handler/route.ts
 
 import { db } from '@/library/db';
+import { currentUser } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 
 // POST CONTROLLER - make a task
@@ -9,9 +10,16 @@ export async function POST(req: Request) {
 
         const { name } = await req.json()
 
+        const user = await currentUser()
+
+        if (!user) {
+            return new NextResponse("Unauthorized", { status: 403 })
+        }
+
         const response = await db.task.create({
             data: {
-                name
+                name,
+                userId: user.id
             }
         })
 

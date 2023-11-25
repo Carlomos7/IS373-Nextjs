@@ -39,13 +39,7 @@ const EditFormComponent = ({ csrf_token, taskData }: EditFormComponentProps) => 
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            await axios.patch(`/api/tasks`, values, {
-                headers: {
-                    'X-CSRF-Token': csrf_token,
-                    'Content-Type': 'application/json',
-                },
-
-            })
+            await axios.patch(`/api/tasks`, values)
 
 
 

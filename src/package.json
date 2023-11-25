@@ -12,7 +12,7 @@
     "prepare": "cd .. && husky install src/.husky"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.27.1",
+    "@clerk/nextjs": "^4.27.2",
     "@hookform/resolvers": "^3.3.2",
     "@prisma/client": "^5.5.2",
     "@radix-ui/react-dialog": "^1.0.5",

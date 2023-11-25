@@ -40,13 +40,7 @@ export function TaskForm({ csrf_token, tasks }: TaskFormProps) {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            await axios.post('/api/tasks', values, {
-                headers: {
-                    'X-CSRF-Token': csrf_token,
-                    'Content-Type': 'application/json',
-                },
-
-            });
+            await axios.post('/api/tasks', values,);
 
 
             router.refresh()
@@ -54,18 +48,18 @@ export function TaskForm({ csrf_token, tasks }: TaskFormProps) {
             toast.success("Task created")
 
         } catch (error) {
-            console.log("Invalid CSRF")
-            toast.error("CSRF Token Invalid!")
+            console.log(error)
+            toast.error("Something went wrong")
         }
     }
 
     return (
-        
+
         <div className="flex flex-col gap-5">
-         <div>
-  <UserButton afterSignOutUrl="/"/>
-  </div>
-            
+            <div>
+                <UserButton afterSignOutUrl="/" />
+            </div>
+
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 flex gap-3">
 

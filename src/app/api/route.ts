@@ -9,12 +9,12 @@ export async function GET(req: Request) {
   return NextResponse.json(getAllUsers)
 }
 
-// Create user
-export async function POST(req: Request) {
-  const createUser = await db.user.create({
-    data: {
-      name: faker.person.fullName(),
-      email: faker.internet.email()
-    }
-  })
-}
+// // Create user
+// export async function POST(req: Request) {
+//   const createUser = await db.user.create({
+//     data: {
+//       name: faker.person.fullName(),
+//       email: faker.internet.email()
+//     }
+//   })
+// }
