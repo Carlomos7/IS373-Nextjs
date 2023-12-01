@@ -1,33 +1,20 @@
 version: "3.8"
 services:
-  # PostgreSQL database service
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+  nextapp:
+    container_name: is373-next
+    build: 
+      context: .
+      target: runner
+    #image: carlomos/nextjs-app:latest
     ports:
-      - "5432:5432" # Adjust the port if necessary
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
-#     networks:
-#       - app-network
-
-#   nextjs-app:
-#     build: 
-#       context: .
-#       target: runner
-#     image: carlomos/nextjs-app:latest
-#     ports:
-#       - "3000:3000"
-#     labels:
-#       - com.centurylinklabs.watchtower.enable=true
-#     environment:
-#       NODE_ENV: development
-#     networks:
-#       - app-network
-
-# networks:
-#   app-network:
-#     driver: bridge
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DIRECT_URL: ${DIRECT_URL}
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      NEXT_PUBLIC_CLERK_SIGN_IN_URL: ${NEXT_PUBLIC_CLERK_SIGN_IN_URL}
+      NEXT_PUBLIC_CLERK_SIGN_UP_URL: ${NEXT_PUBLIC_CLERK_SIGN_UP_URL}
+      NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: ${NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL}
+      NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: ${NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL}
